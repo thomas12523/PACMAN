@@ -1,5 +1,4 @@
 package org.example;
-
 public class Tablero {
     int[][] tablero;
     int cantidadPellets;
@@ -17,7 +16,7 @@ public class Tablero {
                 {1,1,1,1,2,1,1,1,1,2,1,1,1,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,2,2,2,2,2,2,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,1,1,2,1,1,2,1,2,1,1,1,1},
-                {1,2,2,2,2,2,2,0,0,0,0,0,2,2,2,2,2,2,1},
+                {1,1,1,1,2,2,2,0,0,0,0,0,2,2,2,1,1,1,1},
                 {1,1,1,1,2,1,2,1,1,2,1,1,2,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,2,2,2,2,2,2,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,1},
@@ -30,12 +29,9 @@ public class Tablero {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
         };
         this.tablero = tabla;
-        this.cantidadPellets = 116;
+        this.cantidadPellets = 167;
         this.pacman = new Pacman();
         this.fantasma = new Fantasma();
-
-        // Cambiar icono del fantasma
-        this.fantasma.setIcono("👻");
     }
 
     public void printTablero() {
@@ -62,7 +58,7 @@ public class Tablero {
     // (Todo el resto de Tablero.java queda igual, no lo toco)
 
 
-public boolean validPosition(int x, int y){
+    public boolean validPosition(int x, int y){
         return (this.tablero[x][y]!=1);
     }
     public boolean isEqualToZero(){
@@ -77,6 +73,8 @@ public boolean validPosition(int x, int y){
             this.cantidadPellets--;
             this.tablero[x][y]=0;
 
+
+
         } else if (this.tablero[x][y]==3) {
             this.pacman.setSuperPower(true);
             this.pacman.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
@@ -84,6 +82,11 @@ public boolean validPosition(int x, int y){
             this.cantidadPellets--;
             this.tablero[x][y]=0;
             this.fantasma.setIcono("V");
+        }
+        if (this.pacman.isSuperPower()){
+            this.pacman.countDown(); // recordar usar tiempo luego, esto te setea por turno...
+        }else{
+            this.fantasma.setIcono("F");
         }
     }
     public void checkPelletFantasma(int x, int y){
@@ -93,6 +96,9 @@ public boolean validPosition(int x, int y){
             this.fantasma.setVelocity(2); // aumenta la velocidad, lo regulamos cuando veamos GUI.
             this.cantidadPellets--;
             this.tablero[x][y]=0;
+        }
+        if (this.fantasma.isSuperPower()){
+            this.fantasma.countDown(); // recordar usar tiempo luego, esto te setea por turno...
         }
     }
     public void checkCollision(){ // El output no deberia ser un void, pero como no lo vimos aun toca renegar con esto.

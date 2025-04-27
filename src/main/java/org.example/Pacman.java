@@ -4,7 +4,7 @@ public class Pacman extends Jugador {
     private int score;
 
     public Pacman() {
-        super(15, 15, 0, "😋"); // Ahora Pacman arranca con una carita 😋
+        super(15, 9, 0, "P"); // Ahora Pacman arranca con una carita 😋
     }
 
     public int getScore() { return score; }
