@@ -1,4 +1,5 @@
 package org.example;
+
 public class Tablero {
     int[][] tablero;
     int cantidadPellets;
@@ -42,12 +43,13 @@ public class Tablero {
                 } else if (fantasma.getX() == i && fantasma.getY() == j) {
                     System.out.print(fantasma.getIcono() + " ");
                 } else {
+                    // * pellet clasico - + superPoder pacman - ^ superPoder fantasma
                     switch (tablero[i][j]) {
                         case 0 -> System.out.print("  ");
                         case 1 -> System.out.print("█ ");
-                        case 2 -> System.out.print("• ");
-                        case 3 -> System.out.print("◉ ");
-                        case 4 -> System.out.print("⚡ ");
+                        case 2 -> System.out.print("* ");
+                        case 3 -> System.out.print("+ ");
+                        case 4 -> System.out.print("^ ");
                     }
                 }
             }
@@ -77,7 +79,7 @@ public class Tablero {
 
         } else if (this.tablero[x][y]==3) {
             this.pacman.setSuperPower(true);
-            this.pacman.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
+            this.pacman.setSuperPowerDuration(100); // son 10 segundos, modificarlo adelante.
             this.pacman.setVelocity(2); // aumenta la velocidad, lo regulamos cuando veamos GUI.
             this.cantidadPellets--;
             this.tablero[x][y]=0;
