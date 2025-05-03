@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Juego {
     private boolean isRunning;
@@ -12,14 +13,16 @@ public class Juego {
     }
 
     public void jugar() {
+        // Cambiar la página de códigos a UTF-8
+        try {
+            Runtime.getRuntime().exec("cmd /c chcp 65001");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Scanner scanner = new Scanner(System.in);
 
         while (this.isRunning) {
-            // Simular limpiar pantalla
-            for (int i = 0; i < 50; i++) {
-                System.out.println();
-            }
-
             // Imprimir el tablero actualizado
             this.tablero.printTablero();
 
@@ -81,4 +84,3 @@ public class Juego {
         scanner.close();
     }
 }
-
