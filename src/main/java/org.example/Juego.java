@@ -37,6 +37,15 @@ public class Juego extends JFrame implements KeyListener {
                 tablero.getPacman().derecha();
             }
 
+            // Condicional para transportar Pacman
+            if (tablero.getPacman().getX() == 9 && tablero.getPacman().getY() == 0) {
+                tablero.getPacman().setX(9);
+                tablero.getPacman().setY(17);
+            } else if (tablero.getPacman().getX() == 9 && tablero.getPacman().getY() == 18) {
+                tablero.getPacman().setX(9);
+                tablero.getPacman().setY(1);
+            }
+
             // Checkear si Pacman comió algo
             tablero.checkPelletPacman(tablero.getPacman().getX(), tablero.getPacman().getY());
 
@@ -51,21 +60,38 @@ public class Juego extends JFrame implements KeyListener {
                 tablero.getFantasma().right();
             }
 
+            // Condicional para transportar Fantasma
+            if (tablero.getFantasma().getX() == 9 && tablero.getFantasma().getY() == 0) {
+                tablero.getFantasma().setX(9);
+                tablero.getFantasma().setY(17);
+            } else if (tablero.getFantasma().getX() == 9 && tablero.getFantasma().getY() == 18) {
+                tablero.getFantasma().setX(9);
+                tablero.getFantasma().setY(1);
+            }
+
             // Checkear si el Fantasma comió algo
             tablero.checkPelletFantasma(tablero.getFantasma().getX(), tablero.getFantasma().getY());
 
-            // Checkear colisión Pacman vs Fantasma
-            tablero.checkCollision();
 
             // Si chocan, termina el juego
-            if (tablero.getPacman().getX() == tablero.getFantasma().getX() &&
-                    tablero.getPacman().getY() == tablero.getFantasma().getY()) {
-                this.isRunning = false;
+            if (tablero.isEqualToZero()){
+                this.isRunning=false;
+                System.out.println("PACMAN WIN");
+            }
+            // Checkear colisión Pacman vs Fantasma
+            if (tablero.checkCollision()) {
+                if (this.tablero.pacman.isSuperPower()){
+                    System.out.println("PACMAN WIN");
+                    System.out.println("Score obtained: " + this.tablero.pacman.getScore());
+                }else{
+                    System.out.println("FANTASMA WIN");
+                }
+
             }
 
             // Pausa para que no se mueva muy rápido
             try {
-                Thread.sleep(100); // 0.2 segundos
+                Thread.sleep(80); // 0.8 segundos
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -17,7 +17,7 @@ public class Tablero {
                 {1,1,1,1,2,1,1,1,1,2,1,1,1,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,2,2,2,2,2,2,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,1,1,2,1,1,2,1,2,1,1,1,1},
-                {1,1,1,1,2,2,2,0,0,0,0,0,2,2,2,1,1,1,1},
+                {0,0,0,0,2,2,2,0,0,0,0,0,2,2,2,0,0,0,0},
                 {1,1,1,1,2,1,2,1,1,2,1,1,2,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,2,2,2,2,2,2,1,2,1,1,1,1},
                 {1,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,1},
@@ -30,7 +30,7 @@ public class Tablero {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
         };
         this.tablero = tabla;
-        this.cantidadPellets = 167;
+        this.cantidadPellets = 166;
         this.pacman = new Pacman();
         this.fantasma = new Fantasma();
     }
@@ -75,18 +75,15 @@ public class Tablero {
             this.cantidadPellets--;
             this.tablero[x][y]=0;
 
-
-
         } else if (this.tablero[x][y]==3) {
             this.pacman.setSuperPower(true);
-            this.pacman.setSuperPowerDuration(100); // son 10 segundos, modificarlo adelante.
-            this.pacman.setVelocity(2); // aumenta la velocidad, lo regulamos cuando veamos GUI.
+            this.pacman.setSuperPowerDuration(125); // son 10 segundos ( 10/0.08milisegundos)
             this.cantidadPellets--;
             this.tablero[x][y]=0;
             this.fantasma.setIcono("V");
         }
         if (this.pacman.isSuperPower()){
-            this.pacman.countDown(); // recordar usar tiempo luego, esto te setea por turno...
+            this.pacman.countDown();
         }else{
             this.fantasma.setIcono("F");
         }
@@ -96,23 +93,24 @@ public class Tablero {
             this.fantasma.setSuperPower(true);
             this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
             this.fantasma.setVelocity(2); // aumenta la velocidad, lo regulamos cuando veamos GUI.
-            this.cantidadPellets--;
             this.tablero[x][y]=0;
         }
         if (this.fantasma.isSuperPower()){
             this.fantasma.countDown(); // recordar usar tiempo luego, esto te setea por turno...
         }
     }
-    public void checkCollision(){ // El output no deberia ser un void, pero como no lo vimos aun toca renegar con esto.
+    public boolean checkCollision(){ // El output no deberia ser un void, pero como no lo vimos aun toca renegar con esto.
         if ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY())){
 
             if (this.pacman.isSuperPower()){
-                System.out.println("PACMAN WIN");
-                System.out.println("Score obtained: " + this.pacman.getScore());
+                return true;
             }else{
-                System.out.println("FANTASMA WIN");
+                return false;
             }
+        }else{
+            return false;
         }
+
     }
     public int getCantidadPellets() {
         return cantidadPellets;
