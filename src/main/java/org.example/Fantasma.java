@@ -2,10 +2,20 @@ package org.example;
 
 public class Fantasma extends Jugador{
     private boolean vulnerable;
+    private static Fantasma instance;
 
-    public Fantasma(){
+    private Fantasma(){
         super(9,9,0,"F");
     }
+
+
+    public static Fantasma getInstance() {
+        if (instance==null){
+            instance = new Fantasma();
+        }
+        return instance;
+    }
+
 
     public void up() {
         this.setX(getX() - 1);

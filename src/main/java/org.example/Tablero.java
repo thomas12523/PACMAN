@@ -1,12 +1,13 @@
 package org.example;
 
 public class Tablero {
-    int[][] tablero;
-    int cantidadPellets;
-    Pacman pacman;
-    Fantasma fantasma;
+    private int[][] tablero;
+    private int cantidadPellets;
+    public Pacman pacman;
+    private Fantasma fantasma;
+    private static Tablero instance;
 
-    public Tablero() {
+    private Tablero(){
         int[][] tabla = {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                 {1,3,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,3,1},
@@ -30,9 +31,16 @@ public class Tablero {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
         };
         this.tablero = tabla;
-        this.cantidadPellets = 166;
-        this.pacman = new Pacman();
-        this.fantasma = new Fantasma();
+        this.cantidadPellets = 170;
+        this.pacman = Pacman.getInstance();
+        this.fantasma = Fantasma.getInstance();
+    }
+
+    public static Tablero getInstance() {
+        if (instance ==null){
+            instance = new Tablero();
+        }
+        return instance;
     }
 
     public void printTablero() {
@@ -57,17 +65,12 @@ public class Tablero {
         }
     }
 
-    // (Todo el resto de Tablero.java queda igual, no lo toco)
-
-
     public boolean validPosition(int x, int y){
         return (this.tablero[x][y]!=1);
     }
+
     public boolean isEqualToZero(){
-        if (this.cantidadPellets==0){
-            return true;
-        }
-        return false;
+        return getCantidadPellets()==0;
     }
     public void checkPelletPacman(int x, int y){
         if (this.tablero[x][y]==2){
@@ -77,7 +80,7 @@ public class Tablero {
 
         } else if (this.tablero[x][y]==3) {
             this.pacman.setSuperPower(true);
-            this.pacman.setSuperPowerDuration(125); // son 10 segundos ( 10/0.08milisegundos)
+            this.pacman.setSuperPowerDuration(125); // son 10 segundos ( 10/0.08 milisegundos)
             this.cantidadPellets--;
             this.tablero[x][y]=0;
             this.fantasma.setIcono("V");
@@ -100,19 +103,9 @@ public class Tablero {
         }
     }
     public boolean checkCollision(){ // El output no deberia ser un void, pero como no lo vimos aun toca renegar con esto.
-        if ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY())){
-
-            if (this.pacman.isSuperPower()){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-
+        return ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY()));
     }
-    public int getCantidadPellets() {
+    private int getCantidadPellets() {
         return cantidadPellets;
     }
 

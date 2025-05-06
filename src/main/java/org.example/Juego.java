@@ -11,7 +11,7 @@ public class Juego extends JFrame implements KeyListener {
     private boolean player2Up, player2Down, player2Left, player2Right;
 
     public Juego() {
-        this.tablero = new Tablero();
+        this.tablero = Tablero.getInstance();
         this.isRunning = true;
         addKeyListener(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +87,7 @@ public class Juego extends JFrame implements KeyListener {
                     System.out.println("FANTASMA WIN");
                 }
 
+                this.isRunning = false;
             }
 
             // Pausa para que no se mueva muy rápido
