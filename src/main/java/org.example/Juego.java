@@ -6,12 +6,12 @@ import javax.swing.JFrame;
 
 public class Juego extends JFrame implements KeyListener {
     private boolean isRunning;
-    private Tablero tablero;
+    private TableroController tableroController;
     private boolean player1Up, player1Down, player1Left, player1Right;
     private boolean player2Up, player2Down, player2Left, player2Right;
 
     public Juego() {
-        this.tablero = Tablero.getInstance();
+        this.tableroController = TableroController.getInstance();
         this.isRunning = true;
         addKeyListener(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,72 +21,65 @@ public class Juego extends JFrame implements KeyListener {
     public void jugar() {
         while (this.isRunning) {
             // Imprimir el tablero actualizado
-            this.tablero.printTablero();
+            this.tableroController.mostrarTablero();
 
             // Mostrar puntaje actual
-            System.out.println("Puntaje de Pacman: " + tablero.getPacman().getScore());
+            System.out.println("Puntaje de Pacman: " + tableroController.getTablero().getPacman().getScore());
 
             // Movimiento del Pacman (Jugador 1)
-            if (player1Up && tablero.validPosition(tablero.getPacman().getX() - 1, tablero.getPacman().getY())) {
-                tablero.getPacman().arriba();
-            } else if (player1Down && tablero.validPosition(tablero.getPacman().getX() + 1, tablero.getPacman().getY())) {
-                tablero.getPacman().abajo();
-            } else if (player1Left && tablero.validPosition(tablero.getPacman().getX(), tablero.getPacman().getY() - 1)) {
-                tablero.getPacman().izquierda();
-            } else if (player1Right && tablero.validPosition(tablero.getPacman().getX(), tablero.getPacman().getY() + 1)) {
-                tablero.getPacman().derecha();
+            if (player1Up) {
+                this.tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX() - 1, this.tableroController.getTablero().getPacman().getY());
+            } else if (player1Down) {
+                tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX() + 1, this.tableroController.getTablero().getPacman().getY());
+            } else if (player1Left) {
+                this.tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX(), this.tableroController.getTablero().getPacman().getY() - 1);
+            } else if (player1Right) {
+                this.tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX(), this.tableroController.getTablero().getPacman().getY() + 1);
             }
 
             // Condicional para transportar Pacman
-            if (tablero.getPacman().getX() == 9 && tablero.getPacman().getY() == 0) {
-                tablero.getPacman().setX(9);
-                tablero.getPacman().setY(17);
-            } else if (tablero.getPacman().getX() == 9 && tablero.getPacman().getY() == 18) {
-                tablero.getPacman().setX(9);
-                tablero.getPacman().setY(1);
+            if (this.tableroController.getTablero().getPacman().getX() == 9 && this.tableroController.getTablero().getPacman().getY() == 0) {
+                this.tableroController.getTablero().getPacman().setX(9);
+                this.tableroController.getTablero().getPacman().setY(17);
+            } else if (this.tableroController.getTablero().getPacman().getX() == 9 && this.tableroController.getTablero().getPacman().getY() == 18) {
+                this.tableroController.getTablero().getPacman().setX(9);
+                this.tableroController.getTablero().getPacman().setY(1);
             }
 
-            // Checkear si Pacman comió algo
-            tablero.checkPelletPacman(tablero.getPacman().getX(), tablero.getPacman().getY());
-
             // Movimiento del Fantasma (Jugador 2)
-            if (player2Up && tablero.validPosition(tablero.getFantasma().getX() - 1, tablero.getFantasma().getY())) {
-                tablero.getFantasma().up();
-            } else if (player2Down && tablero.validPosition(tablero.getFantasma().getX() + 1, tablero.getFantasma().getY())) {
-                tablero.getFantasma().down();
-            } else if (player2Left && tablero.validPosition(tablero.getFantasma().getX(), tablero.getFantasma().getY() - 1)) {
-                tablero.getFantasma().left();
-            } else if (player2Right && tablero.validPosition(tablero.getFantasma().getX(), tablero.getFantasma().getY() + 1)) {
-                tablero.getFantasma().right();
+            if (player2Up) {
+                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX() - 1, this.tableroController.getTablero().getFantasma().getY());
+            } else if (player2Down) {
+                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX() + 1, this.tableroController.getTablero().getFantasma().getY());
+            } else if (player2Left) {
+                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX(), this.tableroController.getTablero().getFantasma().getY() - 1);
+            } else if (player2Right) {
+                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX(), this.tableroController.getTablero().getFantasma().getY() + 1);
             }
 
             // Condicional para transportar Fantasma
-            if (tablero.getFantasma().getX() == 9 && tablero.getFantasma().getY() == 0) {
-                tablero.getFantasma().setX(9);
-                tablero.getFantasma().setY(17);
-            } else if (tablero.getFantasma().getX() == 9 && tablero.getFantasma().getY() == 18) {
-                tablero.getFantasma().setX(9);
-                tablero.getFantasma().setY(1);
+            if (this.tableroController.getTablero().getFantasma().getX() == 9 && this.tableroController.getTablero().getFantasma().getY() == 0) {
+                this.tableroController.getTablero().getFantasma().setX(9);
+                this.tableroController.getTablero().getFantasma().setY(17);
+            } else if (this.tableroController.getTablero().getFantasma().getX() == 9 && this.tableroController.getTablero().getFantasma().getY() == 18) {
+                this.tableroController.getTablero().getFantasma().setX(9);
+                this.tableroController.getTablero().getFantasma().setY(1);
             }
 
-            // Checkear si el Fantasma comió algo
-            tablero.checkPelletFantasma(tablero.getFantasma().getX(), tablero.getFantasma().getY());
-
-
-            // Si chocan, termina el juego
-            if (tablero.isEqualToZero()){
-                this.isRunning=false;
-                System.out.println("PACMAN WIN");
+            // Si el juego ha terminado
+            if (tableroController.juegoTerminado()) {
+                this.isRunning = false;
+                System.out.println("¡PACMAN WIN!");
             }
+
             // Checkear colisión Pacman vs Fantasma
-            if (tablero.checkCollision()) {
-                if (this.tablero.pacman.isSuperPower()){
-                    System.out.println("PACMAN WIN");
-                    System.out.println("Score obtained: " + this.tablero.pacman.getScore());
-                }else{
-                    System.out.println("FANTASMA WIN");
+            if (this.tableroController.getTablero().checkCollision()) {
+                if (this.tableroController.getTablero().getPacman().isSuperPower()) {
+                    System.out.println("¡PACMAN WIN!");
+                    System.out.println("Puntaje obtenido: " + this.tableroController.getTablero().getPacman().getScore());
+                } else {
+                    System.out.println("¡FANTASMA WIN!");
                 }
-
                 this.isRunning = false;
             }
 
@@ -135,5 +128,4 @@ public class Juego extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent e) {
         // No se necesita implementar este método para este caso
     }
-
 }
