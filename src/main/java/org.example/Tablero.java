@@ -102,7 +102,7 @@ public class Tablero {
             this.fantasma.countDown(); // recordar usar tiempo luego, esto te setea por turno...
         }
     }
-    public boolean checkCollision(){ // El output no deberia ser un void, pero como no lo vimos aun toca renegar con esto.
+    public boolean checkCollision(){
         return ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY()));
     }
     private int getCantidadPellets() {

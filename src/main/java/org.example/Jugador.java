@@ -3,8 +3,8 @@ package org.example;
 
 
 public class Jugador {
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
     private int velocity;
     private boolean superPower;
     private int superPowerDuration;
