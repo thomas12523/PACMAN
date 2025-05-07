@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.jugador.Fantasma;
+import org.example.jugador.Jugador;
+import org.example.jugador.Pacman;
+
 public class Tablero {
     private int[][] tablero;
     private int cantidadPellets;
@@ -84,18 +88,19 @@ public class Tablero {
             this.cantidadPellets--;
             this.tablero[x][y]=0;
             this.fantasma.setIcono("V");
+            this.fantasma.setVulnerable(true);
         }
         if (this.pacman.isSuperPower()){
             this.pacman.countDown();
         }else{
             this.fantasma.setIcono("F");
+            this.fantasma.setVulnerable(false);
         }
     }
     public void checkPelletFantasma(int x, int y){
         if (this.tablero[x][y]==4) {
             this.fantasma.setSuperPower(true);
             this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
-            this.fantasma.setVelocity(2); // aumenta la velocidad, lo regulamos cuando veamos GUI.
             this.tablero[x][y]=0;
         }
         if (this.fantasma.isSuperPower()){
@@ -104,6 +109,15 @@ public class Tablero {
     }
     public boolean checkCollision(){
         return ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY()));
+    }
+    public void transportar(Jugador player){
+        if (player.getX() == 9 && player.getY() == 0) {
+            player.setX(9);
+            player.setY(17);
+        } else if (player.getX() == 9 && player.getY() == 18) {
+            player.setX(9);
+            player.setY(1);
+        }
     }
     private int getCantidadPellets() {
         return cantidadPellets;

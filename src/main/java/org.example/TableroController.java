@@ -1,4 +1,5 @@
 package org.example;
+import org.example.jugador.Jugador;
 
 public class TableroController {
     private Tablero tablero;
@@ -14,36 +15,48 @@ public class TableroController {
         return instance;
     }
     public void moverPacman(int x, int y) {
-        if (tablero.validPosition(x, y)) {
-            tablero.getPacman().setX(x);
-            tablero.getPacman().setY(y);
-            tablero.checkPelletPacman(x, y);
-            if (tablero.checkCollision()) {
-                System.out.println("¡Pacman ha sido atrapado por el fantasma!");
-            }
+        if (this.tablero.validPosition(x, y)) {
+            this.tablero.getPacman().setX(x);
+            this.tablero.getPacman().setY(y);
+            this.tablero.checkPelletPacman(x, y);
+
         }
     }
 
     public void moverFantasma(int x, int y) {
-        if (tablero.validPosition(x, y)) {
-            tablero.getFantasma().setX(x);
-            tablero.getFantasma().setY(y);
-            tablero.checkPelletFantasma(x, y);
-            if (tablero.checkCollision()) {
-                System.out.println("¡El fantasma ha atrapado a Pacman!");
-            }
+        if (this.tablero.validPosition(x, y)) {
+            this.tablero.getFantasma().setX(x);
+            this.tablero.getFantasma().setY(y);
+            this.tablero.checkPelletFantasma(x, y);
+
         }
     }
 
     public void mostrarTablero() {
-        tablero.printTablero();
+        this.tablero.printTablero();
     }
+    public boolean checkCollision(){
+        return this.tablero.checkCollision();
 
+    }
     public boolean juegoTerminado() {
+
         return tablero.isEqualToZero();
     }
 
     public Tablero getTablero() {
         return tablero;
+    }
+    public void transportar(Jugador player){
+        this.getTablero().transportar(player);
+    }
+
+    public void setearDirection(int direction,Jugador player) {
+        switch (direction){
+            case 1 -> player.setDirection(1);
+            case 2 -> player.setDirection(2);
+            case 3 -> player.setDirection(3);
+            case 4 -> player.setDirection(4);
+        }
     }
 }
