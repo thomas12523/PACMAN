@@ -2,7 +2,7 @@ package org.example.jugador;
 //import java.util.Timer;
 
 
-public class Jugador {
+public abstract class Jugador {
     protected int x;
     protected int y;
     private boolean superPower;

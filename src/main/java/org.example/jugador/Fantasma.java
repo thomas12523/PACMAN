@@ -1,6 +1,6 @@
 package org.example.jugador;
 
-public class Fantasma extends Jugador {
+public final class Fantasma extends Jugador {
     private boolean vulnerable;
     private static Fantasma instance;
 
