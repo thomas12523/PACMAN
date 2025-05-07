@@ -76,37 +76,40 @@ public class Tablero {
     public boolean isEqualToZero(){
         return getCantidadPellets()==0;
     }
-    public void checkPelletPacman(int x, int y){
-        if (this.tablero[x][y]==2){
-            this.pacman.setScore(this.pacman.getScore()+100); // el +100 podría ser otro numero como score.
-            this.cantidadPellets--;
-            this.tablero[x][y]=0;
 
-        } else if (this.tablero[x][y]==3) {
-            this.pacman.setSuperPower(true);
-            this.pacman.setSuperPowerDuration(125); // son 10 segundos ( 10/0.08 milisegundos)
-            this.cantidadPellets--;
-            this.tablero[x][y]=0;
-            this.fantasma.setIcono("V");
-            this.fantasma.setVulnerable(true);
-        }
-        if (this.pacman.isSuperPower()){
-            this.pacman.countDown();
+    public void checkPelletPlayer(Jugador player, int x, int y){
+        if (player == this.pacman){
+            if (this.tablero[x][y]==2){
+                this.pacman.setScore(this.pacman.getScore()+100); // el +100 podría ser otro numero como score.
+                this.cantidadPellets--;
+                this.tablero[x][y]=0;
+
+            } else if (this.tablero[x][y]==3) {
+                this.pacman.setSuperPower(true);
+                this.pacman.setSuperPowerDuration(125); // son 10 segundos ( 10/0.08 milisegundos)
+                this.cantidadPellets--;
+                this.tablero[x][y]=0;
+                this.fantasma.setIcono("V");
+                this.fantasma.setVulnerable(true);
+            }
+            if (this.pacman.isSuperPower()){
+                this.pacman.countDown();
+            }else{
+                this.fantasma.setIcono("F");
+                this.fantasma.setVulnerable(false);
+            }
         }else{
-            this.fantasma.setIcono("F");
-            this.fantasma.setVulnerable(false);
+            if (this.tablero[x][y]==4) {
+                this.fantasma.setSuperPower(true);
+                this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
+                this.tablero[x][y]=0;
+            }
+            if (this.fantasma.isSuperPower()){
+                this.fantasma.countDown(); // recordar usar tiempo luego, esto te setea por turno...
+            }
         }
     }
-    public void checkPelletFantasma(int x, int y){
-        if (this.tablero[x][y]==4) {
-            this.fantasma.setSuperPower(true);
-            this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
-            this.tablero[x][y]=0;
-        }
-        if (this.fantasma.isSuperPower()){
-            this.fantasma.countDown(); // recordar usar tiempo luego, esto te setea por turno...
-        }
-    }
+
     public boolean checkCollision(){
         return ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY()));
     }

@@ -14,20 +14,21 @@ public class TableroController {
         }
         return instance;
     }
-    public void moverPacman(int x, int y) {
-        if (this.tablero.validPosition(x, y)) {
-            this.tablero.getPacman().setX(x);
-            this.tablero.getPacman().setY(y);
-            this.tablero.checkPelletPacman(x, y);
 
-        }
-    }
+    public void moverPlayer(Jugador player,int x,int y){
+        if (player == this.tablero.getPacman()){
+            if (this.tablero.validPosition(x,y)){
+                this.tablero.getPacman().setX(x);
+                this.tablero.getPacman().setY(y);
+                this.tablero.checkPelletPlayer(this.tablero.getPacman(),x, y);
+            }
 
-    public void moverFantasma(int x, int y) {
-        if (this.tablero.validPosition(x, y)) {
-            this.tablero.getFantasma().setX(x);
-            this.tablero.getFantasma().setY(y);
-            this.tablero.checkPelletFantasma(x, y);
+        }else{
+            if (this.tablero.validPosition(x,y)){
+                this.tablero.getFantasma().setX(x);
+                this.tablero.getFantasma().setY(y);
+                this.tablero.checkPelletPlayer(this.tablero.getFantasma(),x, y);
+            }
 
         }
     }

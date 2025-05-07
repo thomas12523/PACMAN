@@ -28,16 +28,16 @@ public class Juego extends JFrame implements KeyListener {
 
             // Movimiento del Pacman (Jugador 1)
             if (player1Up) {
-                this.tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX() - 1, this.tableroController.getTablero().getPacman().getY());
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getPacman(), this.tableroController.getTablero().getPacman().getX() - 1, this.tableroController.getTablero().getPacman().getY());
                 this.tableroController.setearDirection(1,this.tableroController.getTablero().getPacman());
             } else if (player1Down) {
-                tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX() + 1, this.tableroController.getTablero().getPacman().getY());
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getPacman(),this.tableroController.getTablero().getPacman().getX() + 1, this.tableroController.getTablero().getPacman().getY());
                 this.tableroController.setearDirection(3,this.tableroController.getTablero().getPacman());
             } else if (player1Left) {
-                this.tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX(), this.tableroController.getTablero().getPacman().getY() - 1);
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getPacman(),this.tableroController.getTablero().getPacman().getX(), this.tableroController.getTablero().getPacman().getY() - 1);
                 this.tableroController.setearDirection(4,this.tableroController.getTablero().getPacman());
             } else if (player1Right) {
-                this.tableroController.moverPacman(this.tableroController.getTablero().getPacman().getX(), this.tableroController.getTablero().getPacman().getY() + 1);
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getPacman(),this.tableroController.getTablero().getPacman().getX(), this.tableroController.getTablero().getPacman().getY() + 1);
                 this.tableroController.setearDirection(2,this.tableroController.getTablero().getPacman());
             }
 
@@ -46,16 +46,16 @@ public class Juego extends JFrame implements KeyListener {
 
             // Movimiento del Fantasma (Jugador 2)
             if (player2Up) {
-                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX() - 1, this.tableroController.getTablero().getFantasma().getY());
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getFantasma(),this.tableroController.getTablero().getFantasma().getX() - 1, this.tableroController.getTablero().getFantasma().getY());
                 this.tableroController.setearDirection(1,this.tableroController.getTablero().getFantasma());
             } else if (player2Down) {
-                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX() + 1, this.tableroController.getTablero().getFantasma().getY());
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getFantasma(),this.tableroController.getTablero().getFantasma().getX() + 1, this.tableroController.getTablero().getFantasma().getY());
                 this.tableroController.setearDirection(1,this.tableroController.getTablero().getFantasma());
             } else if (player2Left) {
-                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX(), this.tableroController.getTablero().getFantasma().getY() - 1);
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getFantasma(),this.tableroController.getTablero().getFantasma().getX(), this.tableroController.getTablero().getFantasma().getY() - 1);
                 this.tableroController.setearDirection(1,this.tableroController.getTablero().getFantasma());
             } else if (player2Right) {
-                this.tableroController.moverFantasma(this.tableroController.getTablero().getFantasma().getX(), this.tableroController.getTablero().getFantasma().getY() + 1);
+                this.tableroController.moverPlayer(this.tableroController.getTablero().getFantasma(),this.tableroController.getTablero().getFantasma().getX(), this.tableroController.getTablero().getFantasma().getY() + 1);
                 this.tableroController.setearDirection(1,this.tableroController.getTablero().getFantasma());
             }
 
