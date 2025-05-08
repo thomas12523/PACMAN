@@ -1,5 +1,4 @@
 package org.example.jugador;
-//import java.util.Timer;
 import lombok.Getter;
 import lombok.Setter;
 

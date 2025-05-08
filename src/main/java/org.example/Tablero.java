@@ -94,6 +94,17 @@ public class Tablero {
                 this.fantasma.setIcono("V");
                 this.fantasma.setVulnerable(true);
             }
+
+        }else{
+            if (this.tablero[x][y]==4) {
+                this.fantasma.setSuperPower(true);
+                this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
+                this.tablero[x][y]=0;
+            }
+        }
+    }
+    public void timer(Jugador player){
+        if (this.pacman == player){
             if (this.pacman.isSuperPower()){
                 this.pacman.countDown();
             }else{
@@ -101,17 +112,11 @@ public class Tablero {
                 this.fantasma.setVulnerable(false);
             }
         }else{
-            if (this.tablero[x][y]==4) {
-                this.fantasma.setSuperPower(true);
-                this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
-                this.tablero[x][y]=0;
-            }
             if (this.fantasma.isSuperPower()){
-                this.fantasma.countDown(); // recordar usar tiempo luego, esto te setea por turno...
+                this.fantasma.countDown();
             }
         }
     }
-
     public boolean checkCollision(){
         return ((this.pacman.getX() == this.fantasma.getX()) && (this.pacman.getY() == this.fantasma.getY()));
     }

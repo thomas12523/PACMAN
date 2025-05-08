@@ -15,6 +15,9 @@ public class TableroController {
         return instance;
     }
 
+    public void timer(Jugador player){
+        this.tablero.timer(player);
+    }
     public void moverPlayer(Jugador player,int x,int y){
         if (player == this.tablero.getPacman()){
             if (this.tablero.validPosition(x,y)){

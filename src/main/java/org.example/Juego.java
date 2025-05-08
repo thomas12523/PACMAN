@@ -80,7 +80,9 @@ public class Juego extends JFrame implements KeyListener {
                         tableroController.getTablero().getFantasma().getY() + 1);
                 tableroController.setearDirection(1, tableroController.getTablero().getFantasma());
             }
-
+            // chequear poder y timer
+            this.tableroController.timer(this.tableroController.getTablero().getPacman());
+            this.tableroController.timer(this.tableroController.getTablero().getFantasma());
             // Chequear colisión
             if (tableroController.checkCollision()) {
                 if (tableroController.getTablero().getPacman().isSuperPower()) {
