@@ -1,5 +1,10 @@
 package org.example.jugador;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public final class Fantasma extends Jugador {
     private boolean vulnerable;
     private static Fantasma instance;
@@ -14,11 +19,6 @@ public final class Fantasma extends Jugador {
             instance = new Fantasma();
         }
         return instance;
-    }
-
-
-    public void setVulnerable(boolean vulnerable) {
-        this.vulnerable = vulnerable;
     }
 
 }

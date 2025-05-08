@@ -1,9 +1,11 @@
 package org.example;
 
+import lombok.Getter;
 import org.example.jugador.Fantasma;
 import org.example.jugador.Jugador;
 import org.example.jugador.Pacman;
 
+@Getter
 public class Tablero {
     private int[][] tablero;
     private int cantidadPellets;
@@ -80,7 +82,7 @@ public class Tablero {
     public void checkPelletPlayer(Jugador player, int x, int y){
         if (player == this.pacman){
             if (this.tablero[x][y]==2){
-                this.pacman.setScore(this.pacman.getScore()+100); // el +100 podría ser otro numero como score.
+                this.pacman.setScore(this.pacman.getScore()+100);
                 this.cantidadPellets--;
                 this.tablero[x][y]=0;
 
@@ -122,17 +124,5 @@ public class Tablero {
             player.setY(1);
         }
     }
-    private int getCantidadPellets() {
-        return cantidadPellets;
-    }
-
-    public Pacman getPacman() {
-        return pacman;
-    }
-
-    public Fantasma getFantasma() {
-        return fantasma;
-    }
-
 
 }

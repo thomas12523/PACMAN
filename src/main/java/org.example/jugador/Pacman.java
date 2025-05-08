@@ -1,5 +1,10 @@
 package org.example.jugador;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public final class Pacman extends Jugador {
     private int score;
     private static Pacman instance;
@@ -16,9 +21,5 @@ public final class Pacman extends Jugador {
         }
         return instance;
     }
-
-    public int getScore() { return score; }
-    public void setScore(int score) { this.score = score; }
-
 
 }
