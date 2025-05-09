@@ -50,17 +50,19 @@ public class Tablero {
     }
 
     public void printTablero() {
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++) {
+        for (int i = 0; i < this.tablero.length; i++) {
+            for (int j = 0; j < this.tablero[i].length; j++) {
                 if (pacman.getX() == i && pacman.getY() == j) {
                     System.out.print(pacman.getIcono() + " ");
                 } else if (fantasma.getX() == i && fantasma.getY() == j) {
                     System.out.print(fantasma.getIcono() + " ");
-                } else {
+
+                }
+                else {
                     // * pellet clasico - + superPoder pacman - ^ superPoder fantasma
                     switch (tablero[i][j]) {
                         case 0 -> System.out.print("  ");
-                        case 1 -> System.out.print("█ ");
+                        case 1 -> System.out.print("▒ ");
                         case 2 -> System.out.print("* ");
                         case 3 -> System.out.print("+ ");
                         case 4 -> System.out.print("^ ");
@@ -73,10 +75,6 @@ public class Tablero {
 
     public boolean validPosition(int x, int y){
         return (this.tablero[x][y]!=1);
-    }
-
-    public boolean isEqualToZero(){
-        return getCantidadPellets()==0;
     }
 
     public void checkPelletPlayer(Jugador player, int x, int y){
@@ -98,9 +96,30 @@ public class Tablero {
         }else{
             if (this.tablero[x][y]==4) {
                 this.fantasma.setSuperPower(true);
-                this.fantasma.setSuperPowerDuration(10); // son 10 segundos, modificarlo adelante.
+                this.fantasma.setSuperPowerDuration(150);
                 this.tablero[x][y]=0;
             }
+        }
+    }
+    private void random(){
+        int i = 0;
+        while (i <10){
+            int x_min = this.pacman.getX()-1;
+            int x_max = this.pacman.getX()+1;
+            int random_x = (int)(Math.random() * (x_max - x_min + 1)) + x_min;
+            int y_min = this.pacman.getY()-1;
+            int y_max = this.pacman.getY()+1;
+            int random_y = (int)(Math.random() * (y_max - y_min + 1)) + y_min;
+
+            if (random_x>=0 && random_x<this.tablero.length && random_y>=0 && random_y<this.tablero[0].length && random_x != this.pacman.getX() && random_y!=this.pacman.getY()){
+                if (validPosition(random_x,random_y)){
+                    this.fantasma.setX(random_x);
+                    this.fantasma.setY(random_y);
+                    break;
+                }
+            }
+            i++;
+
         }
     }
     public void timer(Jugador player){
@@ -114,6 +133,9 @@ public class Tablero {
         }else{
             if (this.fantasma.isSuperPower()){
                 this.fantasma.countDown();
+                if (this.fantasma.getSuperPowerDuration()%50==0){
+                    random();
+                }
             }
         }
     }

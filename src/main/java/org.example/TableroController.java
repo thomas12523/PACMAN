@@ -45,7 +45,7 @@ public class TableroController {
     }
     public boolean juegoTerminado() {
 
-        return tablero.isEqualToZero();
+        return tablero.getCantidadPellets()==0;
     }
 
     public Tablero getTablero() {
