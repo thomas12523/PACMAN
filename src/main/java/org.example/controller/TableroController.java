@@ -1,4 +1,5 @@
-package org.example;
+package org.example.controller;
+import org.example.Tablero;
 import org.example.jugador.Jugador;
 
 public class TableroController {
