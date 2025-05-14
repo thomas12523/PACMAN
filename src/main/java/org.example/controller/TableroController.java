@@ -1,7 +1,9 @@
 package org.example.controller;
+import lombok.Getter;
 import org.example.Tablero;
 import org.example.jugador.Jugador;
 
+@Getter
 public class TableroController {
     private Tablero tablero;
     private static TableroController instance;
@@ -49,9 +51,6 @@ public class TableroController {
         return tablero.getCantidadPellets()==0;
     }
 
-    public Tablero getTablero() {
-        return tablero;
-    }
     public void transportar(Jugador player){
         this.getTablero().transportar(player);
     }

@@ -133,7 +133,7 @@ public class Tablero {
         }else{
             if (this.fantasma.isSuperPower()){
                 this.fantasma.countDown();
-                if (this.fantasma.getSuperPowerDuration()%50==0){
+                if (this.fantasma.getSuperPowerDuration()%25==0){
                     random();
                 }
             }

@@ -85,6 +85,7 @@ public class Juego extends JFrame implements KeyListener {
             // chequear poder y timer
             this.tableroController.timer(this.tableroController.getTablero().getPacman());
             this.tableroController.timer(this.tableroController.getTablero().getFantasma());
+
             // Chequear colisión
             if (tableroController.checkCollision()) {
                 if (tableroController.getTablero().getPacman().isSuperPower()) {
