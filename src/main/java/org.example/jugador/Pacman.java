@@ -6,8 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public final class Pacman extends Jugador {
-    private int score;
     private static Pacman instance;
+    private int score;
+
 
     private Pacman(){
         super(15, 9, "P");

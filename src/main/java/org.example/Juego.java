@@ -1,14 +1,14 @@
 package org.example;
 
 import org.example.controller.TableroController;
-
+import org.example.jugador.Jugador;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 public class Juego extends JFrame implements KeyListener {
+    private final TableroController tableroController;
     private boolean isRunning;
-    private TableroController tableroController;
     private boolean player1Up, player1Down, player1Left, player1Right;
     private boolean player2Up, player2Down, player2Left, player2Right;
 
@@ -16,7 +16,7 @@ public class Juego extends JFrame implements KeyListener {
         this.tableroController = TableroController.getInstance();
         this.isRunning = true;
 
-        // configuracion de hacer invisible el GUI y que funcione
+        // configuracion de hacer invisible el GUI y que funcione keyListener
         setUndecorated(true);
         setSize(0, 0);
         setLocationRelativeTo(null);
@@ -31,57 +31,17 @@ public class Juego extends JFrame implements KeyListener {
 
             // printear tablero
             tableroController.mostrarTablero();
-
             System.out.println("Puntaje de Pacman: " + tableroController.getTablero().getPacman().getScore());
 
             // Movimiento del Pacman (Jugador 1)
-            if (player1Up) {
-                tableroController.moverPlayer(tableroController.getTablero().getPacman(),
-                        tableroController.getTablero().getPacman().getX() - 1,
-                        tableroController.getTablero().getPacman().getY());
-                tableroController.setearDirection(1, tableroController.getTablero().getPacman());
-            } else if (player1Down) {
-                tableroController.moverPlayer(tableroController.getTablero().getPacman(),
-                        tableroController.getTablero().getPacman().getX() + 1,
-                        tableroController.getTablero().getPacman().getY());
-                tableroController.setearDirection(3, tableroController.getTablero().getPacman());
-            } else if (player1Left) {
-                tableroController.moverPlayer(tableroController.getTablero().getPacman(),
-                        tableroController.getTablero().getPacman().getX(),
-                        tableroController.getTablero().getPacman().getY() - 1);
-                tableroController.setearDirection(4, tableroController.getTablero().getPacman());
-            } else if (player1Right) {
-                tableroController.moverPlayer(tableroController.getTablero().getPacman(),
-                        tableroController.getTablero().getPacman().getX(),
-                        tableroController.getTablero().getPacman().getY() + 1);
-                tableroController.setearDirection(2, tableroController.getTablero().getPacman());
-            }
+            accionDelPlayer(tableroController.getTablero().getPacman(),player1Up,player1Down,player1Left,player1Right);
 
             // Transportar Pacman por túnel
             tableroController.transportar(tableroController.getTablero().getPacman());
 
             // Movimiento del Fantasma (Jugador 2)
-            if (player2Up) {
-                tableroController.moverPlayer(tableroController.getTablero().getFantasma(),
-                        tableroController.getTablero().getFantasma().getX() - 1,
-                        tableroController.getTablero().getFantasma().getY());
-                tableroController.setearDirection(1, tableroController.getTablero().getFantasma());
-            } else if (player2Down) {
-                tableroController.moverPlayer(tableroController.getTablero().getFantasma(),
-                        tableroController.getTablero().getFantasma().getX() + 1,
-                        tableroController.getTablero().getFantasma().getY());
-                tableroController.setearDirection(1, tableroController.getTablero().getFantasma());
-            } else if (player2Left) {
-                tableroController.moverPlayer(tableroController.getTablero().getFantasma(),
-                        tableroController.getTablero().getFantasma().getX(),
-                        tableroController.getTablero().getFantasma().getY() - 1);
-                tableroController.setearDirection(1, tableroController.getTablero().getFantasma());
-            } else if (player2Right) {
-                tableroController.moverPlayer(tableroController.getTablero().getFantasma(),
-                        tableroController.getTablero().getFantasma().getX(),
-                        tableroController.getTablero().getFantasma().getY() + 1);
-                tableroController.setearDirection(1, tableroController.getTablero().getFantasma());
-            }
+            accionDelPlayer(tableroController.getTablero().getFantasma(),player2Up,player2Down,player2Left,player2Right);
+
             // chequear poder y timer
             this.tableroController.timer(this.tableroController.getTablero().getPacman());
             this.tableroController.timer(this.tableroController.getTablero().getFantasma());
@@ -107,6 +67,7 @@ public class Juego extends JFrame implements KeyListener {
                 System.out.println("¡PACMAN WIN!");
             }
 
+
             try {
                 Thread.sleep(80);
             } catch (InterruptedException e) {
@@ -115,6 +76,25 @@ public class Juego extends JFrame implements KeyListener {
         }
 
         System.out.println("¡Juego terminado!");
+    }
+    private void accionDelPlayer(Jugador jugador,boolean up, boolean down, boolean left, boolean right){
+        int x = jugador.getX();
+        int y = jugador.getY();
+
+        if (up) {
+            tableroController.moverPlayer(jugador, x - 1, y);
+            tableroController.setearDirection(1, jugador);
+        } else if (down) {
+            tableroController.moverPlayer(jugador, x + 1, y);
+            tableroController.setearDirection(3, jugador);
+        } else if (left) {
+            tableroController.moverPlayer(jugador, x, y - 1);
+            tableroController.setearDirection(4, jugador);
+        } else if (right) {
+            tableroController.moverPlayer(jugador, x, y + 1);
+            tableroController.setearDirection(2, jugador);
+        }
+
     }
 
     @Override

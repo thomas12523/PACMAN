@@ -7,11 +7,12 @@ import org.example.jugador.Pacman;
 
 @Getter
 public class Tablero {
+    private static Tablero instance;
     private int[][] tablero;
     private int cantidadPellets;
     public Pacman pacman;
     private Fantasma fantasma;
-    private static Tablero instance;
+
 
     private Tablero(){
         int[][] tabla = {

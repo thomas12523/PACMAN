@@ -4,9 +4,10 @@ import org.example.Tablero;
 import org.example.jugador.Jugador;
 
 @Getter
-public class TableroController {
-    private Tablero tablero;
+public final class TableroController {
     private static TableroController instance;
+    private Tablero tablero;
+
 
     private TableroController() {
         this.tablero = Tablero.getInstance();
