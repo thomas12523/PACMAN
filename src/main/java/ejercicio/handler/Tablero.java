@@ -1,6 +1,9 @@
 package ejercicio.handler;
 
 
+import ejercicio.enums.GameEventType;
+import ejercicio.observer.GameEvent;
+import ejercicio.observer.GameEventManager;
 import lombok.Getter;
 import ejercicio.jugador.Jugador;
 import ejercicio.jugador.Pacman;
@@ -9,7 +12,7 @@ import ejercicio.jugador.Fantasma;
 @Getter
 public final class Tablero {
     private static Tablero instance;
-    private int[][] tablero;
+    private final int[][] tablero;
     private int cantidadPellets;
     public Pacman pacman;
     private Fantasma fantasma;
@@ -80,25 +83,24 @@ public final class Tablero {
     }
 
     public void checkPelletPlayer(Jugador player, int x, int y){
-        if (player == this.pacman){
+        if (player instanceof Pacman){
             if (this.tablero[x][y]==2){
-                this.pacman.setScore(this.pacman.getScore()+100);
+                GameEventManager.notify(new GameEvent(GameEventType.PUNTAJE,player));
                 this.cantidadPellets--;
                 this.tablero[x][y]=0;
 
             } else if (this.tablero[x][y]==3) {
                 this.pacman.setSuperPower(true);
-                this.pacman.setSuperPowerDuration(125); // son 10 segundos ( 10/0.08 milisegundos)
+                GameEventManager.notify(new GameEvent(GameEventType.SUPERPODER_ACTIVADO,player));
                 this.cantidadPellets--;
                 this.tablero[x][y]=0;
                 this.fantasma.setIcono("V");
                 this.fantasma.setVulnerable(true);
             }
 
-        }else{
+        }else if (player instanceof Fantasma){
             if (this.tablero[x][y]==4) {
-                this.fantasma.setSuperPower(true);
-                this.fantasma.setSuperPowerDuration(150);
+                GameEventManager.notify(new GameEvent(GameEventType.SUPERPODER_ACTIVADO,player));
                 this.tablero[x][y]=0;
             }
         }
@@ -129,8 +131,7 @@ public final class Tablero {
             if (this.pacman.isSuperPower()){
                 this.pacman.countDown();
             }else{
-                this.fantasma.setIcono("F");
-                this.fantasma.setVulnerable(false);
+                GameEventManager.notify(new GameEvent(GameEventType.TIME_POWER,player));
             }
         }else{
             if (this.fantasma.isSuperPower()){

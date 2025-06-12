@@ -4,7 +4,7 @@ package ejercicio.handler;
 import java.io.*;
 import java.util.*;
 
-public class PuntajeFileHandler {
+public final class PuntajeFileHandler {
     private static PuntajeFileHandler instance;
     private static final String ARCHIVO = "puntajes.txt";
 

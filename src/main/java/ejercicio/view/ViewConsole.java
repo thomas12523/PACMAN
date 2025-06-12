@@ -2,6 +2,7 @@ package ejercicio.view;
 
 import ejercicio.controller.*;
 import ejercicio.enums.MenuItem;
+import ejercicio.observer.*;
 
 
 import java.util.InputMismatchException;
@@ -20,6 +21,9 @@ public class ViewConsole  {
         this.tableroController = TableroController.getInstance();
         this.isRunning = true;
         this.moverJugadorController = MoverJugadorController.getInstance();
+        GameEventManager.subscribe(new PuntajeListener());
+        GameEventManager.subscribe(new SuperPoderListener());
+        GameEventManager.subscribe(new TimePowerListener());
     }
 
     public void jugar() {
@@ -72,8 +76,6 @@ public class ViewConsole  {
         }
         String name_Pacman = this.playerPacman();
         this.puntajeFileController.guardarPuntaje(name_Pacman,this.tableroController.getTablero().getPacman().getScore());
-        System.out.println("¡Juego terminado!");
-
         this.Menu();
     }
 
@@ -97,7 +99,7 @@ public class ViewConsole  {
             this.jugar();
         }else if(MenuItem.TOP_10_PACMAN == this.menuItem){
             this.puntajeFileController.mostrarTop();
-            System.out.println("\n\n\n");
+            System.out.println("\n");
             this.Menu();
         }else if (MenuItem.Exit == this.menuItem){
             System.exit(0);

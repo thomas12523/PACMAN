@@ -2,7 +2,7 @@ package ejercicio.controller;
 
 import ejercicio.handler.PuntajeFileHandler;
 
-public class PuntajeFileController {
+public final class PuntajeFileController {
     private static PuntajeFileController instance;
     private PuntajeFileHandler puntajeFileHandler;
 
