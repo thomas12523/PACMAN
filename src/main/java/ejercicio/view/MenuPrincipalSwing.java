@@ -23,22 +23,20 @@ public class MenuPrincipalSwing extends JFrame {
         });
 
         itemTop10.addActionListener(e -> {
-            // Aquí ponés tu código para mostrar top 10, por ejemplo:
-            JOptionPane.showMessageDialog(this, "Top 10 no implementado", "Top 10", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            new Top10Swing();
         });
 
         itemSalir.addActionListener(e -> System.exit(0));
 
         menu.add(itemJugar);
         menu.add(itemSalir);
+        menu.add(itemTop10);
         menuBar.add(menu);
         setJMenuBar(menuBar);
 
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(MenuPrincipalSwing::new);
-    }
 }
 

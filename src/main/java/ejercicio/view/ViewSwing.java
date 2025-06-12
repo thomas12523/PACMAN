@@ -40,7 +40,7 @@ public class ViewSwing extends JFrame implements KeyListener {
         GameEventManager.subscribe(new TimePowerListener());
 
         setTitle("Pacman - Swing Edition");
-        setSize(800, 800);
+        setSize(800, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
