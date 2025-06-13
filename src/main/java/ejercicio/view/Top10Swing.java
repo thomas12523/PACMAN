@@ -69,8 +69,4 @@ public class Top10Swing extends JFrame {
 
         return puntajes;
     }
-
-    public static void mostrarTop() {
-        SwingUtilities.invokeLater(Top10Swing::new);
-    }
 }

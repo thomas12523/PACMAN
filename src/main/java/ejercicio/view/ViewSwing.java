@@ -47,41 +47,41 @@ public class ViewSwing extends JFrame implements KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
-        labelPuntaje = new JLabel("Puntaje: 0");
-        labelPuntaje.setFont(new Font("Arial", Font.BOLD, 16));
+        this.labelPuntaje = new JLabel("Puntaje: 0");
+        this.labelPuntaje.setFont(new Font("Arial", Font.BOLD, 16));
         add(labelPuntaje, BorderLayout.NORTH);
 
-        panelTablero = new JPanel() {
+        this.panelTablero = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 drawTablero(g);
             }
         };
-        panelTablero.setBackground(Color.BLACK);
-        add(panelTablero, BorderLayout.CENTER);
+        this.panelTablero.setBackground(Color.BLACK);
+        add(this.panelTablero, BorderLayout.CENTER);
 
         setVisible(true);
 
-        startGame();  // Iniciar el juego automáticamente al abrir esta ventana
+        this.startGame();  // Iniciar el juego automáticamente al abrir esta ventana
     }
 
     private void startGame() {
         if (isRunning) return;
-        isRunning = true;
+        this.isRunning = true;
 
         new Thread(() -> {
             while (isRunning) {
-                moverJugadorController.movilizar(tableroController.getTablero().getPacman());
-                moverJugadorController.movilizar(tableroController.getTablero().getFantasma());
+                this.moverJugadorController.movilizar(this.tableroController.getTablero().getPacman());
+                this.moverJugadorController.movilizar(this.tableroController.getTablero().getFantasma());
 
-                tableroController.transportar(tableroController.getTablero().getPacman());
-                tableroController.transportar(tableroController.getTablero().getFantasma());
+                this.tableroController.transportar(this.tableroController.getTablero().getPacman());
+                this.tableroController.transportar(this.tableroController.getTablero().getFantasma());
 
-                tableroController.timer(tableroController.getTablero().getPacman());
-                tableroController.timer(tableroController.getTablero().getFantasma());
+                this.tableroController.timer(this.tableroController.getTablero().getPacman());
+                this.tableroController.timer(this.tableroController.getTablero().getFantasma());
 
-                if (tableroController.checkCollision()) {
+                if (this.tableroController.checkCollision()) {
                     isRunning = false;
                     JOptionPane.showMessageDialog(this,
                             tableroController.getTablero().getPacman().isSuperPower() ?
@@ -89,13 +89,13 @@ public class ViewSwing extends JFrame implements KeyListener {
                             "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
                 }
 
-                if (tableroController.juegoTerminado()) {
+                if (this.tableroController.juegoTerminado()) {
                     isRunning = false;
                     JOptionPane.showMessageDialog(this, "¡PACMAN WIN!", "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
                 }
 
-                labelPuntaje.setText("Puntaje: " + tableroController.getTablero().getPacman().getScore());
-                panelTablero.repaint();
+                this.labelPuntaje.setText("Puntaje: " + tableroController.getTablero().getPacman().getScore());
+                this.panelTablero.repaint();
 
                 try {
                     Thread.sleep(80);
@@ -105,16 +105,16 @@ public class ViewSwing extends JFrame implements KeyListener {
             }
             String nombre = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
             if (nombre != null && !nombre.trim().isEmpty()) {
-                puntajeFileController.guardarPuntaje(nombre.trim(), tableroController.getTablero().getPacman().getScore());
+                this.puntajeFileController.guardarPuntaje(nombre.trim(), this.tableroController.getTablero().getPacman().getScore());
             }
             this.dispose();
             new MenuPrincipalSwing();
-            // Aquí podés agregar guardar puntaje o reiniciar juego si querés.
+
         }).start();
     }
 
     private void drawTablero(Graphics g) {
-        int[][] mapa = tableroController.getTablero().getTablero();
+        int[][] mapa = this.tableroController.getTablero().getTablero();
         int cellSize = panelTablero.getWidth() / mapa[0].length;
 
         for (int i = 0; i < mapa.length; i++) {
@@ -135,8 +135,8 @@ public class ViewSwing extends JFrame implements KeyListener {
             }
         }
 
-        drawJugador(g, tableroController.getTablero().getPacman(), cellSize);
-        drawJugador(g, tableroController.getTablero().getFantasma(), cellSize);
+        drawJugador(g, this.tableroController.getTablero().getPacman(), cellSize);
+        drawJugador(g, this.tableroController.getTablero().getFantasma(), cellSize);
     }
 
     private void drawJugador(Graphics g, Jugador jugador, int cellSize) {

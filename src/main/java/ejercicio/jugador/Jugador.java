@@ -10,7 +10,6 @@ public abstract class Jugador {
     private boolean superPower;
     private int superPowerDuration;
     private String icono;
-    private int direction;
 
     public Jugador(int x, int y, String icono){
         this.x = x;
@@ -18,7 +17,6 @@ public abstract class Jugador {
         this.icono = icono;
         this.superPower = false;
         this.superPowerDuration = 0;
-        this.direction = 2;
     }
 
     public void countDown() {

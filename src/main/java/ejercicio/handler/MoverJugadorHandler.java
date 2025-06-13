@@ -67,27 +67,15 @@ public final class MoverJugadorHandler extends JFrame implements KeyListener {
 
         if (up) {
             moverPlayer(jugador, x - 1, y);
-            setearDirection(1, jugador);
         } else if (down) {
             moverPlayer(jugador, x + 1, y);
-            setearDirection(3, jugador);
         } else if (left) {
             moverPlayer(jugador, x, y - 1);
-            setearDirection(4, jugador);
         } else if (right) {
             moverPlayer(jugador, x, y + 1);
-            setearDirection(2, jugador);
         }
     }
-    private void setearDirection(int direction,Jugador player) {
-        switch (direction){
-            // 1 es arriba - 2 derecha - 3 abajo - 4 izquierda
-            case 1 -> player.setDirection(1);
-            case 2 -> player.setDirection(2);
-            case 3 -> player.setDirection(3);
-            case 4 -> player.setDirection(4);
-        }
-    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();

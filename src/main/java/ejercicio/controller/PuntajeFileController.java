@@ -4,7 +4,7 @@ import ejercicio.handler.PuntajeFileHandler;
 
 public final class PuntajeFileController {
     private static PuntajeFileController instance;
-    private PuntajeFileHandler puntajeFileHandler;
+    private final PuntajeFileHandler puntajeFileHandler;
 
     private PuntajeFileController(){
         this.puntajeFileHandler = PuntajeFileHandler.getInstance();

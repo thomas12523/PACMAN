@@ -41,14 +41,5 @@ public final class TableroController {
         this.getTablero().transportar(player);
     }
 
-    public void setearDirection(int direction,Jugador player) {
-        switch (direction){
-            // 1 es arriba - 2 derecha - 3 abajo - 4 izquierda
-            case 1 -> player.setDirection(1);
-            case 2 -> player.setDirection(2);
-            case 3 -> player.setDirection(3);
-            case 4 -> player.setDirection(4);
-        }
-    }
 }
 
