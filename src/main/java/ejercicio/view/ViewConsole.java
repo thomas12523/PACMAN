@@ -26,7 +26,7 @@ public class ViewConsole  {
         GameEventManager.subscribe(new TimePowerListener());
     }
 
-    public void jugar() {
+    private void jugar() {
         while (this.isRunning) {
 
             // printear tablero
@@ -133,7 +133,7 @@ public class ViewConsole  {
     private String playerPacman(){
 
         System.out.println("Pacman introduzca un nombre: ");
-        String name = scanner.nextLine().trim();
+        String name = scanner.nextLine().trim(); // quito los espacios finales e iniciales.
 
         if (name.isEmpty()){
             System.out.println("No dejar el campo null.");

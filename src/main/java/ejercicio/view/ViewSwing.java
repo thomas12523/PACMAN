@@ -16,7 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ViewSwing extends JFrame implements KeyListener {
+public class ViewSwing extends JFrame {
     private final TableroController tableroController;
     private final MoverJugadorController moverJugadorController;
     private final PuntajeFileController puntajeFileController;
@@ -44,7 +44,6 @@ public class ViewSwing extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        addKeyListener(this);
         setFocusable(true);
 
         this.labelPuntaje = new JLabel("Puntaje: 0");
@@ -151,21 +150,5 @@ public class ViewSwing extends JFrame implements KeyListener {
         }
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D,
-                 KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_J, KeyEvent.VK_L -> {
-                MoverJugadorHandler.getInstance().keyPressed(e);
-            }
-        }
-    }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        MoverJugadorHandler.getInstance().keyReleased(e);
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {}
 }
