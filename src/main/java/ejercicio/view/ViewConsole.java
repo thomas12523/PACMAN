@@ -8,7 +8,7 @@ import ejercicio.observer.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ViewConsole  {
+public final class ViewConsole  {
     private final TableroController tableroController;
     private boolean isRunning;
     private final MoverJugadorController moverJugadorController;

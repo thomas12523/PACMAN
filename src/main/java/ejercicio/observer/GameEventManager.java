@@ -5,7 +5,7 @@ import ejercicio.interfaz.GameEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameEventManager {
+public final class GameEventManager {
     private static final List<GameEventListener> listeners = new ArrayList<>();
 
     public static void subscribe(GameEventListener listener) {

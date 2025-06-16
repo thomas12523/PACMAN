@@ -4,7 +4,7 @@ import ejercicio.enums.GameEventType;
 import ejercicio.interfaz.GameEventListener;
 import ejercicio.jugador.Pacman;
 
-public class PuntajeListener implements GameEventListener {
+public final class PuntajeListener implements GameEventListener {
     @Override
     public void onEvent(GameEvent event){
         if (event.getType() == GameEventType.PUNTAJE && event.getData() instanceof Pacman pacman){

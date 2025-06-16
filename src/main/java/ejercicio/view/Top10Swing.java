@@ -6,9 +6,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Top10Swing extends JFrame {
+public final class Top10Swing extends JFrame {
 
-    private static final String ARCHIVO = "puntajes.txt";
+    private static final String ARCHIVO = "src/main/java/ejercicio/puntajes.txt";
 
     public Top10Swing() {
         setTitle("Top 10 Puntajes");

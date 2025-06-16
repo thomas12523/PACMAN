@@ -4,7 +4,7 @@ import ejercicio.enums.GameEventType;
 import lombok.Getter;
 
 @Getter
-public class GameEvent {
+public final class GameEvent {
     private final GameEventType type;
     private final Object data;
 

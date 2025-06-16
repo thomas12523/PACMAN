@@ -5,7 +5,7 @@ import ejercicio.interfaz.GameEventListener;
 import ejercicio.jugador.Fantasma;
 import ejercicio.jugador.Pacman;
 
-public class SuperPoderListener  implements GameEventListener {
+public final class SuperPoderListener  implements GameEventListener {
     @Override
     public void onEvent(GameEvent event){
         if (event.getType() == GameEventType.SUPERPODER_ACTIVADO && event.getData() instanceof Pacman){

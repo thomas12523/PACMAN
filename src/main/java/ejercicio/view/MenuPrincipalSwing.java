@@ -2,7 +2,7 @@ package ejercicio.view;
 
 import javax.swing.*;
 
-public class MenuPrincipalSwing extends JFrame {
+public final class MenuPrincipalSwing extends JFrame {
 
     public MenuPrincipalSwing() {
         setTitle("Menú Principal - Pacman");

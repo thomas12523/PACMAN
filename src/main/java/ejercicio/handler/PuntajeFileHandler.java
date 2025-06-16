@@ -6,7 +6,7 @@ import java.util.*;
 
 public final class PuntajeFileHandler {
     private static PuntajeFileHandler instance;
-    private static final String ARCHIVO = "puntajes.txt";
+    private static final String ARCHIVO = "src/main/java/ejercicio/puntajes.txt";
 
     public static PuntajeFileHandler getInstance(){
         if (instance == null){

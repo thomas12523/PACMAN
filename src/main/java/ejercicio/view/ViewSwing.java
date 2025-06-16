@@ -3,7 +3,6 @@ package ejercicio.view;
 import ejercicio.controller.PuntajeFileController;
 import ejercicio.controller.TableroController;
 import ejercicio.controller.MoverJugadorController;
-import ejercicio.handler.MoverJugadorHandler;
 import ejercicio.jugador.Fantasma;
 import ejercicio.jugador.Jugador;
 import ejercicio.jugador.Pacman;
@@ -14,15 +13,14 @@ import ejercicio.observer.TimePowerListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
-public class ViewSwing extends JFrame {
+public final class ViewSwing extends JFrame {
     private final TableroController tableroController;
     private final MoverJugadorController moverJugadorController;
     private final PuntajeFileController puntajeFileController;
     private final JPanel panelTablero;
     private final JLabel labelPuntaje;
-    private boolean isRunning = false;
+    private boolean isRunning;
     private final Image pacmanImg = new ImageIcon("src/main/java/ejercicio/images/pacman.png").getImage();
     private final Image fantasmaImg = new ImageIcon("src/main/java/ejercicio/images/fantasma.png").getImage();
     private final Image fantasmaVulnerableImg = new ImageIcon("src/main/java/ejercicio/images/fantasmaVulnerable.png").getImage();
@@ -35,6 +33,7 @@ public class ViewSwing extends JFrame {
         this.tableroController = TableroController.getInstance();
         this.moverJugadorController = MoverJugadorController.getInstance();
         this.puntajeFileController = PuntajeFileController.getInstance();
+        this.isRunning = false;
         GameEventManager.subscribe(new SuperPoderListener());
         GameEventManager.subscribe(new PuntajeListener());
         GameEventManager.subscribe(new TimePowerListener());
