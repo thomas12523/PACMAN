@@ -101,7 +101,7 @@ public final class ViewSwing extends JFrame {
                     e.printStackTrace();
                 }
             }
-            String nombre = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
+            String nombre = JOptionPane.showInputDialog(this, "Pacman ingrese su nombre:");
             if (nombre != null && !nombre.trim().isEmpty()) {
                 this.puntajeFileController.guardarPuntaje(nombre.trim(), this.tableroController.getTablero().getPacman().getScore());
             }
