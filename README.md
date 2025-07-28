@@ -1,31 +1,38 @@
 # 🟡 PACMAN-FINAL 🎮
 
-¡Bienvenido al repositorio de **PACMAN-FINAL**!  
-Este proyecto es una versión Java moderna del clásico juego **Pac-Man**, desarrollada con Java 24 y gestionada mediante Maven.
+Welcome to the **PACMAN-FINAL** repository!  
+This project is a modern Java implementation of the classic **Pac-Man** game, built with Java 24 and managed using Maven.
+
+## PACMAN - SWING
+![Game Screenshot](pacman.png)
+
+## PACMAN - CONSOLE
+![swing](Screenshot_2.png)
+---
+
+## 🚀 Features
+
+- Classic *Pac-Man* game implemented in Java.
+- Two game modes available:
+  - **Console mode** (`ViewConsole`)
+  - **Graphical mode** using Swing (`MenuSwing`)
+- Scores are saved persistently in `puntajes.txt`.
+- Maven-based project for easy compilation and execution.
+- Uses **Lombok** to simplify code.
 
 ---
 
-## 🚀 Características
+## 🛠 Requirements
 
-- Implementación del juego *Pac-Man* en Java.
-- Uso de Maven para la gestión del proyecto.
-- Puntajes persistentes guardados en `puntajes.txt`.
-- Configuración de entorno adaptada a múltiples IDEs: IntelliJ, Eclipse, NetBeans y VS Code.
-- Uso de la librería **Lombok** para reducir el boilerplate.
+- Java **17** or higher (Java **24** recommended)
+- Maven
+- A compatible IDE (IntelliJ IDEA, Eclipse, NetBeans, VS Code) or command-line terminal (cmd, bash, PowerShell)
 
 ---
 
-## 🛠 Requisitos
+## ⚙️ Installation and Execution
 
-- Java **17** o superior (recomendado Java **24**).
-- Maven.
-- Un IDE compatible (IntelliJ IDEA, Eclipse, NetBeans o VS Code).
-
----
-
-## ⚙️ Instalación y ejecución
-
-1. Cloná el repositorio:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/tu-usuario/PACMAN-FINAL.git
+   git clone https://github.com/your-username/PACMAN-FINAL.git
    cd PACMAN-FINAL
